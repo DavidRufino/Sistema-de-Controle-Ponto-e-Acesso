@@ -1,0 +1,60 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.dio'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//	Configurações do spring MVC (funcionalidades para atender as requisições HTTP;
+	//	delegar responsabilidades de processamento de dados para outros componentes e preparar a resposta que precisa ser dada;
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//	Dependencia para persistecia JPA que utiliza o hibernate para servir de ORM;
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//	Auto-configuração, Reload;
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	//	Responsavel por fazer parse do json para o objeto Java automaticamente
+	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.9.7'
+
+	//	Conector do SGBD MySQL ou Postgresql
+	runtimeOnly 'mysql:mysql-connector-java'
+	//runtimeOnly 'org.postgresql:postgresql'
+
+	//	Facilita na construção dos get e settes e construtor etc
+	//	apenas adicionando Annotations @
+	//	@Getter	@Setter	@AllArgsConstructor	@NoArgsConstructor	@EqualsAndHashCode	@Builder
+	compileOnly 'org.projectlombok:lombok:1.18.10'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'com.h2database:h2'
+
+	//	Dependencia Swagger para a documentação/teste de APIs REST;
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	implementation group: 'io.springfox', name: 'springfox-bean-validators', version: '2.9.2'
+
+	//	Permite auditar classes persistentes através do controle de versões
+	//	em mapeamentos objetos relacionais feitos através do Hibernate.
+	//	@Audited
+	// https://mvnrepository.com/artifact/org.hibernate/hibernate-envers
+	implementation group: 'org.hibernate', name: 'hibernate-envers', version: '5.5.5.Final'
+
+	//
+	// https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
+	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '7.0.1.Final'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
